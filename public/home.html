@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://fpyf8.com/88/tag.min.js" data-zone="153209" async data-cfasync="false"></script>
   <title>Student Allowance Application</title>
   <link rel="stylesheet" href="style.css" />
@@ -63,7 +63,7 @@
       margin-top: 10px;
       font-weight: bold;
     }
-    input {
+    input, select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -103,15 +103,15 @@
   <!-- Steps -->
   <section class="images-section">
     <div class="image-card">
-      <img src="form.jpg" width="50px" alt="Fill the Form">
+      <img src="form.jpg" alt="Fill the Form">
       <p>Fill out the Application Form</p>
     </div>
     <div class="image-card">
-      <img src="processing.jpg" width="50px" alt="Processing">
+      <img src="processing.jpg" alt="Processing">
       <p>Application is reviewed & verified</p>
     </div>
     <div class="image-card">
-      <img src="money.jpg" width="50px" alt="Allowance">
+      <img src="money.jpg" alt="Allowance">
       <p>Get your Student Allowance within 2 weeks</p>
     </div>
   </section>
@@ -119,6 +119,28 @@
   <!-- Application Form -->
   <form id="applicationForm">
     <h2>Apply Now</h2>
+
+    <!-- 🎯 NEW University Selection -->
+    <label for="university">Your University</label>
+    <select id="university" required>
+      <option value="">-- Select University --</option>
+      <option value="University of Lagos">University of Lagos</option>
+      <option value="University of Nigeria, Nsukka">University of Nigeria, Nsukka</option>
+      <option value="Ahmadu Bello University">Ahmadu Bello University</option>
+      <!-- Add other options -->
+    </select>
+
+    <!-- 🎯 NEW Level Selection -->
+    <label for="level">Your Level</label>
+    <select id="level" required>
+      <option value="">-- Select Level --</option>
+      <option value="100">100 Level</option>
+      <option value="200">200 Level</option>
+      <option value="300">300 Level</option>
+      <option value="400">400 Level</option>
+      <option value="500">500 Level</option>
+    </select>
+
     <label for="name">Full Name</label>
     <input type="text" id="name" required />
 
@@ -130,22 +152,33 @@
 
     <label for="department">Department</label>
     <input type="text" id="department" required />
-
     <label for="cgpa">Most Recent CGPA</label>
     <input type="text" id="cgpa" required />
-    <p>Must have a CGP of at least 1.5 to qualify</p>
+    <p>Must have a CGPA of at least 1.5 to qualify</p>
+
     <label for="email">Email Address</label>
     <input type="email" id="email" required />
 
     <button type="submit">Submit Application</button>
   </form>
+
   <p>This allowance is meant to assist students, and also encourage them to get good grades.</p>
   <p>Feel free to apply multiple times to increase your chances 😉.</p>
+
   <script>
     document.getElementById('applicationForm').addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      const university = document.getElementById('university').value;
+      const level = document.getElementById('level').value;
+
+      // Save to localStorage so that progress.html can access them
+      localStorage.setItem('university', university);
+      localStorage.setItem('level', level);
+
       const data = {
+        university,
+        level,
         name: document.getElementById('name').value,
         regNo: document.getElementById('regNo').value,
         faculty: document.getElementById('faculty').value,
@@ -168,6 +201,5 @@
       }
     });
   </script>
-
 </body>
 </html>
